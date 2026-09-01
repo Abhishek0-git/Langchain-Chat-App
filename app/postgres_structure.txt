@@ -1,0 +1,60 @@
+-- Start your database schema here.
+-- Add CREATE TABLE statements, then define relationships and indexes.
+-- Docs: https://erdgo.com/docs
+
+BEGIN;
+
+-- Enable the pgvector extension (required for vector embeddings)
+CREATE EXTENSION IF NOT EXISTS vector;
+
+-- 1. Create Core Tables (Primary Entities)
+
+CREATE TABLE IF NOT EXISTS public.users (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS public.sessions (
+    id VARCHAR(255) PRIMARY KEY,
+    user_id INTEGER REFERENCES public.users(id) ON DELETE CASCADE ON UPDATE NO ACTION,
+    title VARCHAR(255) DEFAULT 'New Chat',
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 2. Create Dependent Tables & Inline Foreign Keys
+
+CREATE TABLE IF NOT EXISTS public.messages (
+    id SERIAL PRIMARY KEY,
+    session_id VARCHAR(255) REFERENCES public.sessions(id) ON DELETE CASCADE ON UPDATE NO ACTION,
+    role VARCHAR(50) NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS public.uploaded_files (
+    id SERIAL PRIMARY KEY,
+    session_id VARCHAR(255) REFERENCES public.sessions(id) ON DELETE CASCADE ON UPDATE NO ACTION,
+    file_name VARCHAR(255) NOT NULL,
+    file_path TEXT NOT NULL,
+    uploaded_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS public.document_chunks (
+    id SERIAL PRIMARY KEY,
+    file_id INTEGER REFERENCES public.uploaded_files(id) ON DELETE CASCADE ON UPDATE NO ACTION,
+    chunk_number INTEGER DEFAULT 1,
+    chunk_content TEXT NOT NULL,
+    embedding vector(1024)
+);
+
+-- 3. Indexes for Query Performance & ERD Foreign Key Mapping
+
+CREATE INDEX IF NOT EXISTS idx_sessions_user ON public.sessions(user_id);
+CREATE INDEX IF NOT EXISTS idx_messages_session ON public.messages(session_id);
+CREATE INDEX IF NOT EXISTS idx_files_session ON public.uploaded_files(session_id);
+CREATE INDEX IF NOT EXISTS idx_chunks_file ON public.document_chunks(file_id);
+
+COMMIT;

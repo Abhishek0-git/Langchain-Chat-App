@@ -1,0 +1,4 @@
+langchain
+fastapi
+langchain_community
+pathlib

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Document Assistant</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body class="dark-theme">
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="user-profile">
+                <div class="avatar">
+                    <i class="fa-solid fa-user-astronaut"></i>
+                </div>
+                <div class="user-info">
+                    <span class="user-name">Abhishek</span>
+                    <span class="user-status"><i class="fa-solid fa-circle"></i> Online</span>
+                </div>
+                <button class="icon-btn logout-btn" title="Logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
+            </div>
+
+            <button class="new-session-btn" id="new-session-btn">
+                <i class="fa-solid fa-plus"></i> New Chat
+            </button>
+
+            <div class="session-list-container">
+                <h3>Recent Sessions</h3>
+                <nav class="session-nav" id="session-nav">
+                    <!-- Loaded dynamically via script.js -->
+                </nav>
+            </div>
+        </aside>
+
+        <main class="main-chat">
+            
+            <header class="chat-header">
+                <button id="toggle-files-btn" class="toggle-btn">
+                    <i class="fa-solid fa-folder-open"></i> View Uploaded Files <i class="fa-solid fa-chevron-down indicator"></i>
+                </button>
+                
+                <div id="files-panel" class="files-panel hidden">
+                    <!-- Files sync dynamically here -->
+                </div>
+            </header>
+
+            <div class="chat-history" id="chat-history">
+                <!-- Chat logs load dynamically -->
+            </div>
+
+            <div class="input-container">
+                <form id="chat-form" class="chat-form">
+                    
+                    <input type="file" id="file-upload" class="hidden-file-input" multiple>
+                    <label for="file-upload" class="icon-btn upload-label" title="Upload Document">
+                        <i class="fa-solid fa-paperclip"></i>
+                    </label>
+
+                    <textarea 
+                        id="chat-input" 
+                        placeholder="Ask a question about your documents..." 
+                        rows="1"
+                    ></textarea>
+
+                    <button type="submit" class="icon-btn submit-btn" title="Send Message">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

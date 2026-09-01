@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication - AI Workspace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+    <div class="auth-container">
+        <!-- CARD HEADER -->
+        <div class="auth-header">
+            <i class="fa-solid fa-robot logo-icon"></i>
+            <h2>Welcome to AI Workspace</h2>
+            <p id="auth-subtitle">Sign in to access your chat sessions</p>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <form id="login-form" class="auth-form">
+            <div class="input-group">
+                <label for="login-username"><i class="fa-solid fa-user"></i> Username</label>
+                <input type="text" id="login-username" placeholder="Enter your username" required>
+            </div>
+            <div class="input-group">
+                <label for="login-password"><i class="fa-solid fa-lock"></i> Password</label>
+                <input type="password" id="login-password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="auth-btn">Sign In</button>
+            <p class="switch-form-text">Don't have an account? <a href="#" id="to-register">Create one</a></p>
+        </form>
+
+        <!-- REGISTRATION FORM (Hidden by default) -->
+        <form id="register-form" class="auth-form hidden">
+            <div class="input-group">
+                <label for="reg-username"><i class="fa-solid fa-user"></i> Username</label>
+                <input type="text" id="reg-username" placeholder="Choose a username" required>
+            </div>
+            <div class="input-group">
+                <label for="reg-email"><i class="fa-solid fa-envelope"></i> Email Address</label>
+                <input type="email" id="reg-email" placeholder="name@example.com" required>
+            </div>
+            <div class="input-group">
+                <label for="reg-password"><i class="fa-solid fa-lock"></i> Password</label>
+                <input type="password" id="reg-password" placeholder="Create a password" required>
+            </div>
+            <button type="submit" class="auth-btn">Register</button>
+            <p class="switch-form-text">Already have an account? <a href="#" id="to-login">Sign In</a></p>
+        </form>
+    </div>
+
+    <!-- Toast Notification Overlay -->
+    <div id="toast-container"></div>
+    <script src="auth.js" defer></script>
+</body>
+</html>

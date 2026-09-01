@@ -1,0 +1,27 @@
+backend/
+├── app/
+│   ├── api/                # API Routers (where your endpoints live)
+│   │   ├── dependencies.py # Shared dependencies (e.g., auth, DB sessions)
+│   │   ├── routes_chat.py  # Endpoints for user queries
+│   │   └── routes_files.py # Endpoints for file upload & management
+│   ├── core/               # App-wide settings
+│   │   ├── config.py       # Environment variables (API keys, DB URLs)
+│   │   └── database.py     # Database connection setup
+│   ├── agents/             # The "Brain" (LLM & Agent logic)
+│   │   ├── base.py         # Base agent class
+│   │   ├── tools.py        # Tools the agent can use (e.g., search vector DB)
+│   │   └── prompts.py      # System prompts and templates
+│   ├── services/           # Business Logic
+│   │   ├── chat_service.py # Orchestrates the agent to answer queries
+│   │   ├── file_service.py # Handles file saving, parsing, and chunking
+│   │   └── vector_store.py # Logic for embedding text into Pinecone/ChromaDB
+│   ├── models/             # Database tables (e.g., SQLAlchemy)
+│   │   ├── chat_history.py # Stores past conversations for context
+│   │   └── document.py     # Metadata about uploaded files
+│   ├── schemas/            # Pydantic models (Input/Output validation)
+│   │   ├── chat.py         # Expected format for frontend chat requests
+│   │   └── file.py         # Expected format for file upload responses
+│   └── main.py             # FastAPI application initialization
+├── .env                    # Secret keys (DO NOT commit to GitHub)
+├── requirements.txt        # Python dependencies
+└── README.md
