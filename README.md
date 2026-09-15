@@ -1,4 +1,4 @@
-That think i made, took me a lot of my brain and making a readme for that will take more.
+That thing i made, took me a lot of my brain and making a readme for that will take more.
 thus, i am not making it now.
 
 i can give you glimpse of what is going on.
